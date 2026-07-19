@@ -37,3 +37,11 @@ def adicionar_traducao(carta=None):
         )
 
     print("\nTradução adicionada com sucesso!")
+def buscar_traducao(id_carta):
+    if os.path.exists(ARQUIVO):
+        with open(ARQUIVO, "r", encoding="utf-8") as f:
+            traducoes = json.load(f)
+
+        return traducoes.get(str(id_carta))
+
+    return None

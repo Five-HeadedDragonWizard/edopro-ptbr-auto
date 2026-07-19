@@ -1,4 +1,5 @@
 import sqlite3
+from scripts.translation import buscar_traducao
 
 CAMINHO = "/storage/emulated/0/EDOPro/cards.cdb"
 
@@ -31,14 +32,28 @@ def pesquisar():
         ultima_carta["nome"] = carta[1]
         ultima_carta["desc"] = carta[5]
 
+        traducao = buscar_traducao(carta[0])
+
         print("\n==============================")
-        print("Nome :", carta[1])
+
+        if traducao:
+            print("Nome traduzido :", traducao["name"])
+            print("Nome original  :", traducao["original"])
+        else:
+            print("Nome :", carta[1])
+
         print("ID   :", carta[0])
         print("ATK  :", carta[2])
         print("DEF  :", carta[3])
         print("Nível:", carta[4] & 0xFF)
+
         print("\nDescrição:\n")
-        print(carta[5])
+
+        if traducao:
+            print(traducao["desc"])
+        else:
+            print(carta[5])
+
     else:
         print("\nCarta não encontrada.")
 
