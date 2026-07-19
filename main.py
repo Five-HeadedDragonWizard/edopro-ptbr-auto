@@ -1,4 +1,4 @@
-from scripts.search import pesquisar
+from scripts.search import pesquisar, ultima_carta
 from scripts.translation import adicionar_traducao
 
 while True:
@@ -15,7 +15,10 @@ while True:
         pesquisar()
 
     elif opcao == "2":
-        adicionar_traducao()
+        if ultima_carta:
+            adicionar_traducao(ultima_carta)
+        else:
+            adicionar_traducao()
 
     elif opcao == "0":
         print("\nAté logo!")

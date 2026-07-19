@@ -2,6 +2,8 @@ import sqlite3
 
 CAMINHO = "/storage/emulated/0/EDOPro/cards.cdb"
 
+ultima_carta = {}
+
 def pesquisar():
     conexao = sqlite3.connect(CAMINHO)
     cursor = conexao.cursor()
@@ -25,6 +27,10 @@ def pesquisar():
     carta = cursor.fetchone()
 
     if carta:
+        ultima_carta["id"] = carta[0]
+        ultima_carta["nome"] = carta[1]
+        ultima_carta["desc"] = carta[5]
+
         print("\n==============================")
         print("Nome :", carta[1])
         print("ID   :", carta[0])

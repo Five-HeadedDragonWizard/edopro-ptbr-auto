@@ -3,8 +3,15 @@ import os
 
 ARQUIVO = "translations/cards_ptbr.json"
 
-def adicionar_traducao():
-    id_carta = input("\nID da carta: ")
+def adicionar_traducao(carta=None):
+    if carta:
+        id_carta = str(carta["id"])
+        print("\nCarta selecionada:")
+        print("ID:", id_carta)
+        print("Nome original:", carta["nome"])
+    else:
+        id_carta = input("\nID da carta: ")
+
     nome = input("Nome em português: ")
     desc = input("Descrição em português: ")
     credito = input("Créditos: ")
@@ -13,13 +20,13 @@ def adicionar_traducao():
         with open(ARQUIVO, "r", encoding="utf-8") as f:
             traducoes = json.load(f)
     else:
-        traducoes = {}
-
-    traducoes[id_carta] = {
-        "name": nome,
-        "desc": desc,
-        "credit": credito
-    }
+       	traducoes[id_carta] = {
+    "original": carta["nome"]
+ if carta else "",
+    "name": nome,
+    "desc": desc,
+    "credit": credito
+}
 
     with open(ARQUIVO, "w", encoding="utf-8") as f:
         json.dump(
